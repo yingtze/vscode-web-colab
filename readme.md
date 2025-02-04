@@ -7,7 +7,7 @@ To run VS Code on Google Colab using code-server, follow these steps:
 1. **Clone the repository**:
     ```bash
     !git clone https://github.com/yingtze/vscode-web-colab.git
-    %cd yourrepository
+    %cd vscode-web-colab/
     ```
 
 2. **Make the scripts executable**:
