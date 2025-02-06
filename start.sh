@@ -42,13 +42,20 @@ EOL
 # Ensure Homebrew is in the PATH for the current session
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
-# Start Code-Server in the background and suppress its output
-code-server --config "$CONFIG_FILE" > /dev/null 2>&1 &
+# Start Code-Server in the background and log its output
+CODE_SERVER_LOG="/tmp/code-server.log"
+code-server --config "$CONFIG_FILE" > "$CODE_SERVER_LOG" 2>&1 &
 
 # Wait for Code-Server to fully run (adjust sleep as needed)
 echo "Waiting for Code-Server to fully run ..."
 sleep 5
-echo "Code-Server is running on URL: http://0.0.0.0:$PORT"
+
+# Check if "EADDRINUSE" error exists
+if grep -q "error listen EADDRINUSE" "$CODE_SERVER_LOG"; then
+    echo "Code-Server failed to start: Port $PORT is already in use."
+else
+    echo "Code-Server is running on URL: http://0.0.0.0:$PORT"
+fi
 
 #########################################
 # Start Bore Tunnel

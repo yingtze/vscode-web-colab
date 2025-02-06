@@ -12,7 +12,7 @@ To run VS Code on Google Colab using code-server, follow these steps:
 
 2. **Make the scripts executable**:
     ```bash
-    !chmod +x install.sh start-code-server.sh
+    !chmod +x install.sh start.sh
     ```
 
 3. **Run the installation script**:
@@ -22,7 +22,7 @@ To run VS Code on Google Colab using code-server, follow these steps:
 
 4. **Start code-server**:
     ```bash
-    !bash start-code-server.sh
+    !bash start.sh
     ```
 
 5. **Access VS Code**:

@@ -39,4 +39,4 @@ else
     echo "❌ bore-cli installation failed."
 fi
 
-echo "Installation complete! Use run.sh to start services."
+echo "Installation complete! Use start.sh to start services."
