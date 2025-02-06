@@ -1,27 +1,27 @@
 #!/bin/bash
 
-# Install Homebrew (if not already installed)
-if ! command -v brew &>/dev/null; then
+# Ensure Homebrew is in the PATH before checking
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+# Check if Homebrew is installed
+if brew --version &>/dev/null; then
+    echo "✅ Homebrew is already installed."
+else
     echo "Installing Homebrew..."
     NONINTERACTIVE=1 bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" > /dev/null 2>&1
 
-    # Check if Homebrew was installed successfully
-    if command -v brew &>/dev/null; then
-        echo "✅ Homebrew installed successfully!"
-        eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+    # Reload shell environment to detect Homebrew
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
-        # Add Homebrew to the PATH permanently in .bashrc
+    # Verify installation
+    if brew --version &>/dev/null; then
+        echo "✅ Homebrew installed successfully!"
         echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.bashrc
     else
         echo "❌ Homebrew installation failed."
         exit 1
     fi
-else
-    echo "✅ Homebrew is already installed."
 fi
-
-# Ensure Homebrew is in the PATH for the current session
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 # Install required packages silently
 echo "Installing required packages..."
