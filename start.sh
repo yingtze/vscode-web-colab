@@ -53,6 +53,7 @@ sleep 5
 # Check if "EADDRINUSE" error exists
 if grep -q "error listen EADDRINUSE" "$CODE_SERVER_LOG"; then
     echo "Code-Server failed to start: Port $PORT is already in use."
+    exit 1  # Stop script execution if Code-Server failed
 else
     echo "Code-Server is running on URL: http://0.0.0.0:$PORT"
 fi
